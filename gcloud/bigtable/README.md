@@ -2,6 +2,8 @@
 
 ## Analysis
 * Design of row key is very important.
+    * Using a human-readable row key is recommended as they are easier to reason about and easier to trace.
+    * The key visualizer tool can help troubleshoot issues.
 * Makes heavy use of locality for fetching data within ranges of sorted string row keys.
 * Tracks mutations across rows.
 * All rows are associated with a timestamp.
