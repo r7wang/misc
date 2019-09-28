@@ -13,6 +13,6 @@ sudo mv jdk-12.0.1.jdk /Library/Java/JavaVirtualMachines/
 
 Create aliases to switch between Java versions (in .zlogin, .bash_profile).
 ```bash
-alias j11="export JAVA_HOME=/usr/libexec/java_home -v 11; java -version"
-alias j8="export JAVA_HOME=/usr/libexec/java_home -v 1.8; java -version"
+alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
+alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
 ```
