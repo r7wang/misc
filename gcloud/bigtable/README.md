@@ -21,6 +21,12 @@
     * If that cluster becomes unavailable, you must manually fail over to another cluster.
 * Garbage collection policies can be defined per column family.
 
+## Constraints
+* Any given row should be no larger than 100 MB (recommended), with a hard limit of 256 MB.
+    * The implication here is that column family qualifiers can be large but should not be unbounded.
+* Any given row's column family should be no larger than 10 MB (recommended).
+* An instance should contain no more than 1000 tables.
+
 ## Advantageous Queries
 * What were the last ten values of a given column family qualifier for a localized set of row keys?
 
