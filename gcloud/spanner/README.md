@@ -3,7 +3,7 @@
 ## Facts & Analysis
 * Widely used by Google for many aspects of their business as referenced [here](https://www.nextplatform.com/2019/01/15/spanning-the-database-world-with-google/).
     * Recommended for OLTP applications requiring a strong schema system, cross-row transactions, consistent replication, and a powerful query language.
-    * Used as a source of truth for a variety of missino-critical Google databases.
+    * Used as a source of truth for a variety of mission-critical Google databases.
     * Google Play is a large customer, using it to manage customer purchases and accounts, serving 10mil+ QPS, 100+ PB of data.
 * Claims to be differentiated through implementation of the following techniques:
     * Distributed query execution, including compilation and execution of joins, consuming query results from parallel workers.
@@ -31,6 +31,11 @@
     * Author makes the conclusion that Spanner does not perform well for OLAP use cases; this is something we may have to spend more time prototyping.
 * Support for backups did not exist, but this can now be done through an import/export process referenced [here](https://cloud.google.com/blog/products/gcp/cloud-spanner-adds-import-export-functionality-to-ease-data-movement).
     * Without backups, certain types of application defects and human error can be extremely expensive.
+* Requires 1 node for every 2 TB of data in the database.
+    * Must be manually provisioned.
+* SLA:
+    * Multi-regional instance: >= 99.999%
+    * Regional instance: >= 99.99%
 
 ## Disadvantages
 * Other platforms have no comparable alternatives; this ties implementation to GCP.
@@ -47,8 +52,12 @@
 
 ## Whitepapers
 * [Spanner: Becoming a SQL System](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/acac3b090a577348a7106d09c051c493298ccb1d.pdf)
+* [Spanner, TrueTime & The CAP Theorem](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45855.pdf)
+* [Spanner: Google's Globally Distributed Database](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/65b514eda12d025585183a641b5a9e096a3c4be5.pdf)
 
 ## Other Articles
+* [Life of Cloud Spanner Reads & Writes](https://cloud.google.com/spanner/docs/whitepapers/life-of-reads-and-writes)
+* [Life of a Cloud Spanner Query](https://cloud.google.com/spanner/docs/whitepapers/life-of-query)
 * [How Google Cloud Storage offers strongly consistent object listing thanks to Spanner](https://cloud.google.com/blog/products/gcp/how-google-cloud-storage-offers-strongly-consistent-object-listing-thanks-to-spanner)
 * [Best Practices on Migrating to Cloud Spanner (Cloud Next '19)](https://www.youtube.com/watch?v=FNeGQUqMa_c&autoplay=1)
 * [Spanner Internals Part 1: What Makes Spanner Tick?](https://www.youtube.com/watch?v=nvlt0dA7rsQ&autoplay=1)
