@@ -30,6 +30,7 @@
 * Some performance benchmarking can be found [here](https://www.lightspeedhq.com/blog/google-cloud-spanner-good-bad-ugly/).
     * Author makes the conclusion that Spanner does not perform well for OLAP use cases; this is something we may have to spend more time prototyping.
 * Can use time-bounded reads instead of strong reads for improved performance when dealing with certain types of workloads and where strong reads are not explicitly required.
+* Can use sparse secondary indices to optimize an object scan for items that need to be processed by an asynchronous operation.
 * Support for backups did not exist, but this can now be done through an import/export process referenced [here](https://cloud.google.com/blog/products/gcp/cloud-spanner-adds-import-export-functionality-to-ease-data-movement).
     * Without backups, certain types of application defects and human error can be extremely expensive.
 * Requires 1 node for every 2 TB of data in the database.
