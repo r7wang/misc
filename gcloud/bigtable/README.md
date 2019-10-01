@@ -69,4 +69,6 @@
 ## Other Articles
 * [BigTable: storing Protobuf bytes in one column vs splitting the content into column families/qualifiers](https://tech.travelaudience.com/bigtable-storing-protobuf-bytes-in-one-column-vs-splitting-the-content-into-column-families-c231bdff8db7)
 * [Financial services firm processes 25 billion stock market events per hour with Google Cloud Bigtable](https://cloud.google.com/blog/products/gcp/financial-services-firm-processes-25-billion-stock-market-events-per-hour-with-google-cloud-bigtable)
+* [Moving from Cassandra to Auto-Scaling Bigtable at Spotify](https://www.youtube.com/watch?time_continue=1514&v=Hfd3VZOYXNU)
+* [Building a Global Data Presence with Cloud Bigtable](https://www.youtube.com/watch?v=dHr707_6woY)
 
