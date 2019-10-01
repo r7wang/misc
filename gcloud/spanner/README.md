@@ -16,7 +16,7 @@
     * What's the implication here?
 * Schema allows specifying parent-child relationships between tables.
     * Child table is co-located with the parent table.
-* Time-versioned database.
+* An explanation on how to build a time-versioned changelog can be found [here](https://cloud.google.com/spanner/docs/commit-timestamp#creating_a_changelog).
 * Values are divided into active and inactive files.
 * Large (multi-page) values are segregated into separate files, allowing for rapid scans of tables without paying I/O cost of reading large values until they are needed.
 * Has client libraries in the following languages:
@@ -63,7 +63,6 @@
 * Get a better understanding of Paxos consensus algorithm.
 * How is the performance consistency?
 * When to use single-consumer vs. parallel-consumer API?
-* Can we query older versions of values?
 
 ## Whitepapers
 * [Spanner: Becoming a SQL System](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/acac3b090a577348a7106d09c051c493298ccb1d.pdf)
