@@ -22,7 +22,6 @@
 
 ## Constraints
 * Requires 1 node for every 2 TB of data in the database.
-    * Must be manually provisioned.
 * DDL statements cannot be executed within web console. These statements can be done through client library calls.
 * The garbage collection policy (version GC) reclaims space from stale data after one hour.
     * Stale reads cannot acquire garbage collected data older than the garbage collection interval.
@@ -31,9 +30,9 @@
 ## Advantages
 * Strong consistency guarantees at scale, without sacrificing effective availability.
 * No need for retry loops as transient failures are handled internally.
-* Supports SQL.
-    * SQL dialect is used across multiple query systems at Google, including F1 and BigQuery.
-    * SQL dialect makes Protocol Buffer message and enum types first class types, implying that it should be painless to store and interact with these types of messages.
+* Supports dialect of SQL known as Standard SQL.
+    * Dialect is used across multiple query systems at Google, including F1 and BigQuery.
+    * Protocol Buffer message and enum types are first class types, implying that it should be painless to store and interact with these types of messages.
 * Supports NoSQL methods for lookups and range scans of individual tables.
 * Support for efficient streaming pagination through query results.
 * Simplifies applications by handling server-side transient failures with automatic query restarts.
@@ -49,7 +48,9 @@
 * Optimized for OLTP use cases so OLAP use cases may suffer from performance or may require more optimization attention.
     * Some performance benchmarking can be found [here](https://www.lightspeedhq.com/blog/google-cloud-spanner-good-bad-ugly/).
     * Streak talks about tradeoffs between Spanner and Bigtable [here](https://www.youtube.com/watch?v=3aHBkfBRFEU), highlighting a complex analytical query.
-* Modifying the primary key requires deleting and rewriting the data, approximately equivalent to a migration.
+* Modifying the primary key requires recreation of the table.
+    * This is roughly equivalent to a migration and will require a data export/import.
+    * Support for this feature is tracked [here](https://issuetracker.google.com/issues/135719292).
 * Autoscaling can not be set as a policy and must be implemented at the application level through the RPC or REST API.
 
 ## Architectural Notes
@@ -62,7 +63,6 @@
 
 ## Further Investigation
 * How do we migrate existing data into Cloud Spanner?
-* What is the process of schema migration?
 * Get a better understanding of Paxos consensus algorithm.
 * How is the performance consistency?
 * When to use single-consumer vs. parallel-consumer API?
