@@ -1,25 +1,20 @@
 # Spanner
 
-## Facts & Analysis
-* Widely used by Google for many aspects of their business as referenced [here](https://www.nextplatform.com/2019/01/15/spanning-the-database-world-with-google/).
+## Usage
+* Widely used by Google across many products and mission-critical databases as referenced [here](https://www.nextplatform.com/2019/01/15/spanning-the-database-world-with-google/).
     * Recommended for OLTP applications requiring a strong schema system, cross-row transactions, consistent replication, and a powerful query language.
-    * Used as a source of truth for a variety of mission-critical Google databases.
     * Google Play is a large customer, using it to manage customer purchases and accounts, serving 10mil+ QPS, 100+ PB of data.
-* Claims to be differentiated through implementation of the following techniques:
-    * Distributed query execution, including compilation and execution of joins, consuming query results from parallel workers.
-    * Range extraction, deciding which servers should process a query, and how to minimize the row ranges scanned and locked by each server.
-    * Handling server-side failures with query restarts, hiding transient failures during execution to simplify applications.
-    * SQL dialect used across multiple query systems at Google including F1 and BigQuery.
-    * Replacing Bigtable SSTable stack with a blockwise-columnar store (Ressi) better optimized for hybrid OLTP/OLAP workloads, since 1H 2017.
-* Sharded by row-range, bounded by key prefixes.
-* Secondary indices implemented like tables.
-    * What's the implication here?
+* An explanation on how to build a time-versioned changelog can be found [here](https://cloud.google.com/spanner/docs/commit-timestamp#creating_a_changelog).
+
+## Facts
+* Sharded by row-range, which is defined through prefixes across the primary key.
 * Schema allows specifying parent-child relationships between tables.
     * Child table is co-located with the parent table.
-* An explanation on how to build a time-versioned changelog can be found [here](https://cloud.google.com/spanner/docs/commit-timestamp#creating_a_changelog).
-* Values are divided into active and inactive files.
-* Large (multi-page) values are segregated into separate files, allowing for rapid scans of tables without paying I/O cost of reading large values until they are needed.
-* Has client libraries in the following languages:
+* Secondary indices implemented like tables.
+    * Can use sparse secondary indices to optimize an object scan for items that need to be processed by an asynchronous operation.
+* Backups are done through an import/export process referenced [here](https://cloud.google.com/blog/products/gcp/cloud-spanner-adds-import-export-functionality-to-ease-data-movement).
+    * Without backups, certain types of application defects and human error can be extremely expensive.
+* Language support and client libraries:
     * C#, Go, Java, node.js, PHP, Python, and Ruby
 * SLA:
     * Multi-regional instance: >= 99.999%
@@ -37,16 +32,15 @@
 * Strong consistency guarantees at scale, without sacrificing effective availability.
 * No need for retry loops as transient failures are handled internally.
 * Supports SQL.
+    * SQL dialect is used across multiple query systems at Google, including F1 and BigQuery.
     * SQL dialect makes Protocol Buffer message and enum types first class types, implying that it should be painless to store and interact with these types of messages.
 * Supports NoSQL methods for lookups and range scans of individual tables.
 * Support for efficient streaming pagination through query results.
+* Simplifies applications by handling server-side transient failures with automatic query restarts.
 * Schema changes can be done without downtime.
 * Requires very little operational maintenance.
     * Resharding is done dynamically.
 * Can use time-bounded reads instead of strong reads for improved performance when dealing with certain types of workloads and where strong reads are not explicitly required.
-* Can use sparse secondary indices to optimize an object scan for items that need to be processed by an asynchronous operation.
-* Support for backups through an import/export process referenced [here](https://cloud.google.com/blog/products/gcp/cloud-spanner-adds-import-export-functionality-to-ease-data-movement).
-    * Without backups, certain types of application defects and human error can be extremely expensive.
 
 ## Disadvantages
 * Other platforms have no comparable alternatives; this ties implementation to GCP.
@@ -56,6 +50,15 @@
     * Some performance benchmarking can be found [here](https://www.lightspeedhq.com/blog/google-cloud-spanner-good-bad-ugly/).
     * Streak talks about tradeoffs between Spanner and Bigtable [here](https://www.youtube.com/watch?v=3aHBkfBRFEU), highlighting a complex analytical query.
 * Modifying the primary key requires deleting and rewriting the data, approximately equivalent to a migration.
+* Autoscaling can not be set as a policy and must be implemented at the application level through the RPC or REST API.
+
+## Architectural Notes
+* Has advanced implementation of the following techniques:
+    * Distributed query execution, including compilation and execution of joins, consuming query results from parallel workers.
+    * Range extraction, deciding which servers should process a query, and how to minimize the row ranges scanned and locked by each server.
+* Replaced Bigtable SSTable stack with a blockwise-columnar store (Ressi), better optimized for hybrid OLTP/OLAP workloads, since 1H 2017.
+* Values are divided into active and inactive files.
+* Large (multi-page) values are segregated into separate files, allowing for rapid scans of tables without paying I/O cost of reading large values until they are needed.
 
 ## Further Investigation
 * How do we migrate existing data into Cloud Spanner?
