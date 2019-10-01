@@ -3,6 +3,7 @@
 ## Usage
 * Recommended for very high throughput and scalability for non-structured key/value data.
 * Very easy to perform a query for the last n copies of a given row.
+* Reads and writes incur the same cost, hence write-heavy workloads are a good fit.
 * Using a human-readable row key is recommended for traceability.
     * The key visualizer tool can help troubleshoot issues.
 
@@ -36,6 +37,7 @@
 * An instance should contain no more than 1000 tables.
 
 ## Advantages
+* Consistent 99th percentile low single digit millisecond read and write latency.
 * Cluster resizing can be done without downtime.
 * Requires very little operational maintenance.
     * Resharding is done dynamically.
