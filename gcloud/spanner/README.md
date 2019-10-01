@@ -21,11 +21,17 @@
 * Large (multi-page) values are segregated into separate files, allowing for rapid scans of tables without paying I/O cost of reading large values until they are needed.
 * Has client libraries in the following languages:
     * C#, Go, Java, node.js, PHP, Python, and Ruby
-* Requires 1 node for every 2 TB of data in the database.
-    * Must be manually provisioned.
 * SLA:
     * Multi-regional instance: >= 99.999%
     * Regional instance: >= 99.99%
+
+## Constraints
+* Requires 1 node for every 2 TB of data in the database.
+    * Must be manually provisioned.
+* DDL statements cannot be executed within web console. These statements can be done through client library calls.
+* The garbage collection policy (version GC) reclaims space from stale data after one hour.
+    * Stale reads cannot acquire garbage collected data older than the garbage collection interval.
+    * Whether or not the garbage collection policy can change is yet to be determined.
 
 ## Advantages
 * Strong consistency guarantees at scale, without sacrificing effective availability.
