@@ -52,6 +52,8 @@
     * This is roughly equivalent to a migration and will require a data export/import.
     * Support for this feature is tracked [here](https://issuetracker.google.com/issues/135719292).
 * Autoscaling can not be set as a policy and must be implemented at the application level through the RPC or REST API.
+* Certain types of constraints (foreign key, CHECK) are not supported and must be moved to the application layer.
+    * Limited foreign key constraints are supported for relationships between parent and interleaved tables.
 
 ## Architectural Notes
 * Has advanced implementation of the following techniques:

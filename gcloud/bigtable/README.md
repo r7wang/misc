@@ -6,6 +6,8 @@
 * Reads and writes incur the same cost, hence write-heavy workloads are a good fit.
 * Using a human-readable row key is recommended for traceability.
     * The key visualizer tool can help troubleshoot issues.
+* Spotify's migration from Cassandra resulted in:
+    * 150-250 nodes (application-level autoscaling), storing approximately 40+ TB of unique data.
 
 ## Facts
 * Sharded by row-range, which is defined through prefixes across the row key.
