@@ -71,4 +71,5 @@
 * [Financial services firm processes 25 billion stock market events per hour with Google Cloud Bigtable](https://cloud.google.com/blog/products/gcp/financial-services-firm-processes-25-billion-stock-market-events-per-hour-with-google-cloud-bigtable)
 * [Moving from Cassandra to Auto-Scaling Bigtable at Spotify](https://www.youtube.com/watch?time_continue=1514&v=Hfd3VZOYXNU)
 * [Building a Global Data Presence with Cloud Bigtable](https://www.youtube.com/watch?v=dHr707_6woY)
+* [The Joy and Pain of using Google Bigtable](https://syslog.ravelin.com/the-joy-and-pain-of-using-google-bigtable-4210604c75be)
 
