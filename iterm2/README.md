@@ -1,11 +1,23 @@
 # Summary
 
+Install brew
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Download and install prerequisites
+```bash
+brew install git
+brew install npm
+```
+
 Download and install ITerm2
 
 Install zsh
 ```bash
 brew install zsh
-chsh -s $(which zsh)
+chsh -s /bin/zsh
 ```
 
 Logout and re-login
@@ -23,8 +35,12 @@ Close and quit ITerm2 and reopen it
 
 Configure .zshrc
 ```bash
+npm install --global pure-prompt
 open ~/.zshrc
-# Set ZSH_THEME="avit"
+# Set ZSH_THEME=""
+# Go to end of file and add:
+#  autoload -U promptinit; promptinit
+#  prompt pure
 ```
 
 Change font size
@@ -57,4 +73,4 @@ Map ⌥ → to action "Send Escape Sequence" + "f"
 
 # References
 [Jazz Up Your ZSH Terminal](https://www.freecodecamp.org/news/jazz-up-your-zsh-terminal-in-seven-steps-a-visual-guide-e81a8fd59a38/)
-
+[sindresorhus/pure](https://github.com/sindresorhus/pure)
