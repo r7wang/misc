@@ -67,8 +67,8 @@ source ~/.zshrc
 Configure Word Traversal
 ```bash
 Open iTerm2 > Preferences > Profiles > Keys
-Map ⌥ ← to action "Send Escape Sequence" + "b"
-Map ⌥ → to action "Send Escape Sequence" + "f"
+Map `⌥ ←` to action `"Send Escape Sequence" + "b"`
+Map `⌥ →` to action `"Send Escape Sequence" + "f"`
 ```
 
 # References
